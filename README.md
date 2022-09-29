@@ -127,17 +127,27 @@ PECERT1	  		2		DOES � HAVE A CURRENTLY
 > Deal with null values
 > Investigate columns that can be dropped or have redundant information  
 > Decide how to deal with outliers  
+> Work through questions involving variables typically present on resume
+* Primary focus for first pass through explore phase
+> Craft general explore section outline
+* Include areas for feature engineering via cluster, rfe, and selectKbest
+> Work on modeling section
+* Craft functions for model testing. **NO BIG MASS TESTING FUNCTION**
+* Prep MVP
+* Decide which questions to highlight within Final Report
+* Craft outline/skeleton for final report
 
+
+
+> Explore
+- 
 > Clustering
 - Decide on which features to use when crafting clusters
 - Create cluster feature sets
 - Add cluster labels as features  
 > Statistical testing based on clustering
 - Create functions that iterate through statistical tests
-- Organize in Explore section 
-> Explore
-- Visualize cluster differences to gauge impact
-- Rank clusters based on statistical weight
+
 > Modeling
 * Create functions that automate iterative model testing
     - Adjust parameters and feature makes
