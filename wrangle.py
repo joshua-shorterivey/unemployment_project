@@ -142,10 +142,6 @@ def prep_columns(df):
         'pubus1': 'upaid_work_last_week',
         'pudis2': 'disability_preventing_work_in_next_6_months',
         'pehruslt': 'usual_hours_worked',
-        'pelkavl': 'could_have_started_job',
-        'pedwlko': 'sought_work_last_12_months',
-        'pedwwk': 'worked_last_12_months',
-        'pejhwant': 'intend_to_look_next_12_months',
         'prempnot': 'employed',
         'prmjind1': 'industry',
         'prmjocc1': 'occupation',
@@ -162,9 +158,7 @@ def prep_columns(df):
                         'industry','occupation']
 
     binary_cols = ['own_bus_or_farm', 'sex', 'veteran','hispanic_or_non', 
-                'upaid_work_last_week','could_have_started_job',
-                'sought_work_last_12_months', 'worked_last_12_months',
-                'intend_to_look_next_12_months','employed', 'usual_ot_tips_commis',
+                'upaid_work_last_week','employed', 'usual_ot_tips_commis',
                 'enrolled_in_school','professional_certification']  
 
     #for loop to handle assignment as object

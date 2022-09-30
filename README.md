@@ -80,7 +80,7 @@ PRCHLD			2		PRESENCE OF OWN CHILDREN <18 YEARS
 PECERT1	  		2		DOES � HAVE A CURRENTLY
 -----
 
-# Initial Questions and Hypotheses
+# Major Questions and Hypotheses
 ## Question 1 -  ?
 * ${H_0}$: 
 * ${H_a}$: 
@@ -189,8 +189,6 @@ PECERT1	  		2		DOES � HAVE A CURRENTLY
 > Multivariate:
 * Visuals exploring features as they relate to home value
 > Statistical Analysis:
-* SpearmanR for continous vs continous
-* Two tailed T-Test (Sample vs Population) for discrete vs continous
 > Collect and collate section *Takeaways*
 
 ## Model
