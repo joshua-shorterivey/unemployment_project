@@ -135,7 +135,10 @@ PECERT1	  		2		DOES � HAVE A CURRENTLY
 * Craft functions for model testing. **NO BIG MASS TESTING FUNCTION**
 * Prep MVP
 * Decide which questions to highlight within Final Report
+* Go back through data dictionary
 * Craft outline/skeleton for final report
+    * Takeaways highlighted    
+* Look into creating feature that blends `household_num` and `family_income` to measure at or above median income for family of that size
 
 
 
