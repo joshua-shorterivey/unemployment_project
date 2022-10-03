@@ -6,15 +6,14 @@ from sklearn.preprocessing import MinMaxScaler
 def acquire_aug():
     ''' 
     Purpose:
-
+        Acquires local csv that contains information from August 2022 Current Population
+        Survey released by the U.S. Census Bureau
     ---
-
     Parameters:
-
+        None
     ---
-
     Output:
-    
+        df: acquired dataframe
     ---
     '''
 
@@ -28,15 +27,13 @@ def acquire_aug():
 def flatten_race(val):
     ''' 
     Purpose:
-
+        To reduce the number of options  within the feature
     ---
-
     Parameters:
-
+        val
     ---
-
     Output:
-    
+        val
     ---
     '''
     if val == 1:
@@ -58,15 +55,13 @@ def flatten_race(val):
 def flatten_education(val):
     ''' 
     Purpose:
-
+    To reduce the number of options  within the feature
     ---
-
     Parameters:
-
+        val
     ---
-
     Output:
-    
+        val
     ---
     '''
     if val <= 38:
@@ -84,15 +79,13 @@ def flatten_education(val):
 def flatten_marital(val):
     ''' 
     Purpose:
-
+    To reduce the number of options  within the feature
     ---
-
     Parameters:
-
+        val
     ---
-
     Output:
-    
+        val
     ---
     '''
     if val in [1,2,5]:
@@ -104,15 +97,13 @@ def flatten_marital(val):
 def flatten_citizenship(val):
     ''' 
     Purpose:
-
+    To reduce the number of options  within the feature
     ---
-
     Parameters:
-
+        val
     ---
-
     Output:
-    
+        val
     ---
     '''
     if val <= 3:
@@ -127,15 +118,13 @@ def flatten_citizenship(val):
 def flatten_household_type(val):
     ''' 
     Purpose:
-
+    To reduce the number of options  within the feature
     ---
-
     Parameters:
-
+        val
     ---
-
     Output:
-    
+        val
     ---
     '''
     if val == 0:
@@ -157,15 +146,13 @@ def flatten_household_type(val):
 def flatten_birth_country(val):
     ''' 
     Purpose:
-
+    To reduce the number of options  within the feature
     ---
-
     Parameters:
-
+        val
     ---
-
     Output:
-    
+        val
     ---
     '''
     if val == 57:
@@ -179,15 +166,13 @@ def flatten_birth_country(val):
 def flatten_parent(val):
     ''' 
     Purpose:
-
+    To reduce the number of options  within the feature
     ---
-
     Parameters:
-
+        val
     ---
-
     Output:
-    
+        val
     ---
     '''
     if val == 57:
@@ -201,22 +186,23 @@ def flatten_parent(val):
 def prep_values(df):
     ''' 
     Purpose:
-
     ---
-
     Parameters:
-
+        df: 
     ---
-
     Output:
-    
+        df: prepared data frame with values adjusted and unwanted items removed
     ---
     '''
     #decided to dropna's cleared up problem with target variable
     df = df.dropna()
 
     # fixing peafnow  --> get rid of peafnow
-    df.iloc[np.where(df.peafnow == 1)]['peafever'] = 1
+    mask = df.peafnow == 1
+    df.loc[mask,'peafever'] = 1
+
+    # drop invalid responses for industry and occupation
+    df = df[(df.prmjind1 != -1) | (df.prmjocc1 != -1)]
 
     #work done to fix usual_hours_worked with manual imputation 
     #mean hours worked for those less that work less than 35
@@ -226,8 +212,9 @@ def prep_values(df):
     less_than_35 = round(df[(df.pehruslt > 0) & (df.pehruslt < 35)].pehruslt.mean())
     df[['pehrftpt', 'pehruslt']].value_counts()
 
-    df[df.pehrftpt == 1]['pehruslt'] = more_than_35
-    df[df.pehrftpt == 2]['pehruslt'] = less_than_35
+    mask =  df.peafnow == 1
+    df.loc[mask,'pehruslt'] = more_than_35
+    df.loc[mask,'pehruslt'] = less_than_35
 
     # remove responses from people not in the labor force by means other that discouragement
     df = df[df.prempnot != 4]
@@ -244,13 +231,11 @@ def prep_columns(df):
     Purpose:
 
     ---
-
     Parameters:
-
+        df
     ---
-
     Output:
-    
+        df
     ---
     '''
 
@@ -324,16 +309,14 @@ def prep_columns(df):
 
 def prep_aug():
     ''' 
-    Purpose:
-
+    Purpose:  
+        To prepare August 2022 data
     ---
-
     Parameters:
-
+        None
     ---
-
     Output:
-
+        df: a dataframe with prepared columns and values
     ---
     '''
 
@@ -346,10 +329,23 @@ def prep_aug():
     return df
 
 def split_scale(df, dummy='n'):
-
-    if dummy == 'y':
-        df = pd.get_dummies(df)
-
+    ''' 
+    Purpose:
+        To split and scale the input dataframe
+    ---
+    Parameters:
+        df: a tidy dataframe
+        dummy: deprecated
+    ---
+    Output:
+        train: unscaled subset of dataframe for exploration and model training
+        validate: unscaled and unseen data for model testing
+        test: unscaled and unseen data for final model test
+        train_scaled: scaled subset of dataframe for exploration and model training
+        validate_scaled: scaled and unseen data for model testing
+        test_scaled: scaled and unseen data for model testing
+    ---
+    '''
     #train_test_split
     train_validate, test = train_test_split(df, test_size=.2, random_state=514, stratify=df['employed'])
     train, validate = train_test_split(train_validate, test_size=.3, random_state=514, stratify=train_validate['employed'])
@@ -371,6 +367,10 @@ def split_scale(df, dummy='n'):
     # apply
     train_scaled[num_cols.columns] = scaler.transform(train[num_cols.columns])
     validate_scaled[num_cols.columns] =  scaler.transform(validate[num_cols.columns])
-    test_scaled =  scaler.transform(test[num_cols.columns])
+    test_scaled[num_cols.columns] = scaler.transform(test[num_cols.columns])
+
+    train_scaled = pd.get_dummies(train_scaled)
+    validate_scaled = pd.get_dummies(validate_scaled)
+    test_scaled = pd.get_dummies(test_scaled)
 
     return train, validate, test, train_scaled, validate_scaled, test_scaled
