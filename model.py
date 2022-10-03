@@ -72,7 +72,6 @@ def spotlight_stats(df, feature, title, phase=None):
     plt.figure(figsize=(20,6))
     sns.catplot(data=df, x=feature, col='employed', kind='count', sharey=False)
     plt.suptitle(title, y=1.02)
-    plt.legend()
     plt.show()
 
     return round(prop_df, 3)

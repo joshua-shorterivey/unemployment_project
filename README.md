@@ -65,7 +65,7 @@ professional_certification |51736 non-null float64 |    DOES � HAVE A CURRENTL
 >* ${H_0}$: There is no relationship between having a `professional_certification` and `employment`  
 >* ${H_a}$: There is a relationship between having a `professional_certification` and `employment`    
 >* ${\alpha}$: .05
->* Result: There is enough evidence to reject our null hypothesis. **Test code below**
+>* Result: There is enough evidence to reject our null hypothesis. 
 
 ### Spotlight - Race
 * **Question:** Which industry shows the largest population proportion change between employed and unemployed?
@@ -76,7 +76,7 @@ professional_certification |51736 non-null float64 |    DOES � HAVE A CURRENTL
 >* ${H_0}$: There is no relationship between `race` and `employment` status   
 >* ${H_a}$: There is a relationship between `race` and `employment` status   
 >* ${\alpha}$: .05  
->* Result: There is enough evidence to reject our null hypothesis. **Test code below**
+>* Result: There is enough evidence to reject our null hypothesis. 
 
 ### Spotlight - Industry 
 * **Question:** Which industry shows the largest population proportion change between employed and unemployed?  
@@ -86,7 +86,7 @@ professional_certification |51736 non-null float64 |    DOES � HAVE A CURRENTL
 >* ${H_0}$: There is no relationship between industry of typical employment and employment status   
 >* ${H_a}$: There is a relationship between industry of typical employment and employment status  
 >* ${\alpha}$: .05  
->* Result: There is enough evidence to reject our null hypothesis. **Test code below**
+>* Result: There is enough evidence to reject our null hypothesis. 
  
 ### Spotlight - Professional Certification
 * **Question:** What is the effect of having a professional certification? 
@@ -97,7 +97,7 @@ professional_certification |51736 non-null float64 |    DOES � HAVE A CURRENTL
 >* ${H_0}$: There is no relationship between having a `professional_certification` and `employment`  
 >* ${H_a}$: There is a relationship between having a `professional_certification` and `employment`    
 >* ${\alpha}$: .05
->* Result: There is enough evidence to reject our null hypothesis. **Test code below**
+>* Result: There is enough evidence to reject our null hypothesis.
 
 ## Summary of Key Findings
 >* As a portion the population unemployed individuals are small.
